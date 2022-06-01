@@ -1,0 +1,10 @@
+.categorylist > .row.header {
+  margin-top: 20px;
+  margin: 10px;
+}
+.categorylist > .row {
+  display: grid;
+  grid-template-columns: 100px repeat(3, minmax(125px, 1fr));
+  min-width: 900px;
+  margin: 10px;
+}

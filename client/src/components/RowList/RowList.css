@@ -1,0 +1,38 @@
+.todolist > .row {
+  display: grid;
+  grid-template-columns: 100px repeat(5, minmax(125px, 1fr)) 100px;
+  min-width: 900px;
+  margin: 10px;
+}
+.cell {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  background-color: #e8eaf5;
+  color: #616161;
+  padding: 10px 10px;
+}
+.header {
+  border-radius: 5px;
+  background-color: #999999;
+}
+.header > .cell {
+  background-color: unset;
+  color: #ffffff;
+  border: none;
+}
+
+.btnRow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(30px, 1fr));
+}
+
+.myBtn {
+  cursor: pointer;
+}
+.myBtn img {
+  width: 25px;
+}
+.cell > img {
+  width: 40px;
+}
