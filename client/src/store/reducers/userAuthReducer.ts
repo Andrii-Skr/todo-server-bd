@@ -1,8 +1,6 @@
-import { createReducer } from "@reduxjs/toolkit";
+import { createReducer, PayloadAction } from "@reduxjs/toolkit";
 import { authAction } from "../actions/auth-action";
-import { UserDto } from "../types";
-
-//import AuthService from "src/Service/auth-servise";
+import { AuthRes, UserDto } from "../types";
 
 export type UserState = {
   userDto?: UserDto;
@@ -17,28 +15,28 @@ const defaultState: UserState = {
 };
 
 export const userAuthReducer = createReducer<UserState>(defaultState, (builder) => {
-  builder.addCase(authAction.login, (state, action: any) => {
+  builder.addCase(authAction.login, (state, action: PayloadAction<AuthRes>) => {
     localStorage.setItem("token", action.payload.accessToken);
     state.userAuth = true;
     state.userDto = action.payload.user;
   });
-  builder.addCase(authAction.registration, (state, action: any) => {
+  builder.addCase(authAction.registration, (state, action: PayloadAction<AuthRes>) => {
     localStorage.setItem("token", action.payload.accessToken);
     state.userAuth = true;
     state.userDto = action.payload.user;
   });
-  builder.addCase(authAction.logout, (state, action: any) => {
+  builder.addCase(authAction.logout, (state, action: PayloadAction<AuthRes>) => {
     localStorage.removeItem("token");
     state.userAuth = false;
     state.userDto = undefined;
   });
-  builder.addCase(authAction.checkAuth, (state, action: any) => {
-    localStorage.setItem("token", action.payload.data.accessToken);
+  builder.addCase(authAction.checkAuth, (state, action: PayloadAction<AuthRes>) => {
+    localStorage.setItem("token", action.payload.accessToken);
     state.userAuth = true;
-    state.userDto = action.payload.data.user;
+    state.userDto = action.payload.user;
     state.isloading = false;
   });
-  builder.addCase(authAction.checkLoading, (state, action: any) => {
+  builder.addCase(authAction.checkLoading, (state, action: PayloadAction<AuthRes>) => {
     state.isloading = false;
   });
 });

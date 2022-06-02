@@ -9,7 +9,6 @@ class AuthControler {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         return next(ApiError.badRequest("=(", errors.array()));
-        //return res.json({ message: "reg err =(", errors });
       }
       const { email, password } = req.body;
       const userData = await Authentication.postRegistration(email, password);

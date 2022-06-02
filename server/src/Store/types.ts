@@ -35,10 +35,6 @@ export interface MyPayload extends JwtPayload {
 
 export type Payload = { email: string; id: string; isActivated: boolean };
 
-// export interface MyRequest extends Request {
-//   user: Payload;
-// }
-
 declare global {
   namespace NodeJS {
     interface ProcessEnv {

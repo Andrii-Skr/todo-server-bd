@@ -51,7 +51,7 @@ export type userData = {
 };
 
 export type AuthRes = {
-  AccessToken: string;
+  accessToken: string;
   RefreshToken: string;
   user: userData;
 };

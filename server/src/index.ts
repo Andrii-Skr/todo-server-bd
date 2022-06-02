@@ -2,7 +2,7 @@ import "dotenv/config";
 import express, { ErrorRequestHandler, Express } from "express";
 import routes from "./Routes/routes";
 import mongoose from "mongoose";
-import autRoutes from "./Routes/authRoutes";
+import authRoutes from "./Routes/authRoutes";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import { errorMiddleware } from "./Middleware/error-middleware";
@@ -45,7 +45,7 @@ const start = () => {
       })
     );
     app.use("/notes", routes);
-    app.use("/auth", autRoutes);
+    app.use("/auth", authRoutes);
     app.use(errorMiddleware);
     app.listen(port, () => {
       console.log(`Example app listening on port ${port}`);

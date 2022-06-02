@@ -3,9 +3,9 @@ import authController from "../Repositories/authController";
 import { check } from "express-validator";
 import { authMiddleware } from "../Middleware/auth-middleware";
 
-const autRouter: Router = express.Router();
+const authRouter: Router = express.Router();
 
-autRouter.post(
+authRouter.post(
   "/registration",
   [
     check("email", "Check email plz").notEmpty().isEmail(),
@@ -13,10 +13,10 @@ autRouter.post(
   ],
   authController.registration
 );
-autRouter.post("/logout", authController.logout);
-autRouter.post("/login", authController.login);
-autRouter.get("/activation/:link", authController.getActivation);
-autRouter.get("/users", authMiddleware, authController.users);
-autRouter.get("/refresh", authController.refresh);
+authRouter.post("/logout", authController.logout);
+authRouter.post("/login", authController.login);
+authRouter.get("/activation/:link", authController.getActivation);
+authRouter.get("/users", authMiddleware, authController.users);
+authRouter.get("/refresh", authController.refresh);
 
-export default autRouter;
+export default authRouter;

@@ -1,10 +1,10 @@
-import { ThunkAction } from "@reduxjs/toolkit";
-import AuthService from "src/Service/auth-servise";
+import { Action, ThunkAction } from "@reduxjs/toolkit";
+import AuthService from "src/api/auth-api";
 import { authAction } from "../actions/auth-action";
 import { UserState } from "../reducers/userAuthReducer";
 
 export const loginThunk =
-  (email: string, pass: string): ThunkAction<void, UserState, unknown, any> =>
+  (email: string, pass: string): ThunkAction<void, UserState, unknown, Action<string>> =>
   async (dispatch) => {
     try {
       dispatch({ type: "loading" });
@@ -16,7 +16,7 @@ export const loginThunk =
   };
 
 export const registrationThunk =
-  (email: string, pass: string): ThunkAction<void, UserState, unknown, any> =>
+  (email: string, pass: string): ThunkAction<void, UserState, unknown, Action<string>> =>
   async (dispatch) => {
     try {
       dispatch({ type: "loading" });
@@ -27,21 +27,22 @@ export const registrationThunk =
     }
   };
 
-export const logoutThunk = (): ThunkAction<void, UserState, unknown, any> => async (dispatch) => {
-  try {
-    dispatch({ type: "loading" });
-    const response = await AuthService.logout();
-    dispatch({ type: authAction.logout, payload: response });
-  } catch (error) {
-    console.log(error);
-  }
-};
+export const logoutThunk =
+  (): ThunkAction<void, UserState, unknown, Action<string>> => async (dispatch) => {
+    try {
+      //dispatch({ type: "loading" });
+      const response = await AuthService.logout();
+      dispatch({ type: authAction.logout, payload: response });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 export const checkAuthThunk =
-  (): ThunkAction<void, UserState, unknown, any> => async (dispatch) => {
+  (): ThunkAction<void, UserState, unknown, Action<string>> => async (dispatch) => {
     try {
       const response = await AuthService.checkAuth();
-      dispatch({ type: authAction.checkAuth, payload: response });
+      dispatch({ type: authAction.checkAuth, payload: response.data });
     } catch (error) {
       console.log(error);
     }

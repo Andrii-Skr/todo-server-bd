@@ -2,7 +2,6 @@ import { NextFunction, Response, Request } from "express";
 import TokenService from "../Services/token-service";
 import { ApiError } from "../Exceptions/api-error";
 import "../Store/types";
-//import { Payload } from "../Store/types";
 
 export function authMiddleware(req: Request, res: Response, next: NextFunction) {
   if (req.method === "OPTIONS") {

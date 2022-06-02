@@ -9,9 +9,9 @@ const $api = axios.create({
 
 $api.interceptors.request.use((config) => {
   if (!config.headers) {
-    throw new Error("heder?");
+    throw new Error("header?");
   }
-  config.headers.Autorization = `Berer ${localStorage.getItem("token")}`;
+  config.headers.Autorization = `Bearer ${localStorage.getItem("token")}`;
   return config;
 });
 

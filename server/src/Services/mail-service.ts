@@ -1,5 +1,3 @@
-//import "dotenv/config";
-//@ts-nocheck
 import nodemailer from "nodemailer";
 
 export const sendAuthMail = async (to: string, link: string) => {
@@ -13,6 +11,7 @@ export const sendAuthMail = async (to: string, link: string) => {
     throw new Error("email problem");
   }
   const transporter = nodemailer.createTransport({
+    //@ts-ignore
     host: process.env.SMTP_Host,
     port: process.env.SMTP_Post,
     secure: false,

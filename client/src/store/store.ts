@@ -1,6 +1,5 @@
 import { applyMiddleware, createStore } from "@reduxjs/toolkit";
 import { RootState } from "./types";
-//import { devToolsEnhancer } from "@redux-devtools/extension";
 
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "@redux-devtools/extension";
@@ -16,5 +15,4 @@ export const selectIsEdit = (state: RootState) => state.interface.isEdit;
 export const selectCurrentNote = (state: RootState) => state.interface.currentNote;
 export const selectIsVisible = (state: RootState) => state.interface.isVisible;
 
-//export const store = createStore(reducer, devToolsEnhancer());
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));

@@ -3,7 +3,6 @@ import { parseDate } from "../Helpers/parseDate";
 import { getStat } from "../Helpers/getStat";
 import DbNote from "../Models/note-model";
 import { noteSchemaCreate } from "../Repositories/noteSchema";
-//import { ValidationError } from "yup";
 
 class OperationWithNotes {
   async removeNote(id: Note) {

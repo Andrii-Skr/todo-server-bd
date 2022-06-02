@@ -15,7 +15,7 @@ export default class AuthService {
     return $api.post("auth/logout");
   }
 
-  static async checkAuth(): Promise<void> {
+  static async checkAuth(): Promise<AxiosResponse<AuthRes>> {
     return axios.get(`${API_URL}auth/refresh`, { withCredentials: true });
   }
 }
