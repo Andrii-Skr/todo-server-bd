@@ -7,10 +7,10 @@ import EditModal from "../EditModal";
 import RowList from "../RowList";
 import RowStatList from "../RowStatList";
 
-const NoteListRoute = () => {
+const NoteListRoute = ({ archiveStateDefaulte }: { archiveStateDefaulte: boolean }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const [archiveState, setState] = useState<boolean>(false);
+  const [archiveState, setState] = useState<boolean>(archiveStateDefaulte);
   const activeState = (state: boolean) => {
     setState(!state);
     if (state) {

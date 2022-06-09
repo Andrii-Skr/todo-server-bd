@@ -10,6 +10,7 @@ import { logoutAction } from "src/store/actions/auth-action";
 import Loading from "../LoadingScreen/Loading";
 import AuthRoute from "../Routes/AuthRoute";
 import NoteListRoute from "../Routes/NoteListRoute";
+import NotFoundRoute from "../Routes/NotFoundRoute";
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
@@ -38,7 +39,6 @@ function App() {
   if (isAuth === "unknown") {
     return (
       <div>
-        <h1>unknown!!!!</h1>
         <Loading />
       </div>
     );
@@ -56,9 +56,10 @@ function App() {
               </div>
             }
           />
-          <Route path="note" element={<NoteListRoute />} />
-          <Route path="archive" element={<NoteListRoute />} />
+          <Route path="note" element={<NoteListRoute archiveStateDefaulte={false} />} />
+          <Route path="archive" element={<NoteListRoute archiveStateDefaulte={true} />} />
         </Route>
+        <Route path="*" element={<NotFoundRoute />} />
       </Routes>
     </div>
   );
