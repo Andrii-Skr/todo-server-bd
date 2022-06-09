@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { interfaceAction } from "src/store/actions/interface-action";
+import { isEditAction, isVisibleAction } from "src/store/actions/interface-action";
 import { archiveThunk, removeThunk } from "src/store/thunk/notes-thunk";
 import { AppDispatch, Note } from "src/store/types";
 const icons = {
@@ -24,8 +24,8 @@ const Row = ({ note }: RowProp) => {
       <div className="cell btnRow">
         <div
           onClick={() => {
-            dispatch({ type: interfaceAction.isEdit, note });
-            dispatch({ type: interfaceAction.isVisible, isVisible: true });
+            dispatch({ type: isEditAction, payload: { note } });
+            dispatch({ type: isVisibleAction, payload: { isVisible: true } });
           }}
           className="myBtn edit"
         >

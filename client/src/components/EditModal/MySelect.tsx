@@ -6,7 +6,8 @@ type optionsT = {
   name: string;
 };
 type MySelectProp = { options: optionsT[]; value: string; onChange: (e: Category) => void };
-const MySelect = ({ options, value, onChange }: MySelectProp) => {
+const MySelect = React.memo(({ options, value, onChange }: MySelectProp) => {
+  console.log("MySelect");
   return (
     <select
       name="select"
@@ -21,6 +22,6 @@ const MySelect = ({ options, value, onChange }: MySelectProp) => {
       ))}
     </select>
   );
-};
+});
 
 export default MySelect;

@@ -6,7 +6,7 @@ import "./EditModal.css";
 import { createThunk, editThunk } from "src/store/thunk/notes-thunk";
 import { useSelector } from "react-redux";
 import { selectCurrentNote, selectIsEdit, selectIsVisible } from "src/store/store";
-import { interfaceAction } from "src/store/actions/interface-action";
+import { isVisibleAction } from "src/store/actions/interface-action";
 
 type EditModalProp = {
   archiveState: boolean;
@@ -34,7 +34,7 @@ const EditModal = (props: EditModalProp) => {
   const dispatch = useDispatch<AppDispatch>();
   const currentNote = useSelector(selectCurrentNote);
   const [editedNote, setEditedNote] = useState(defaultNote);
-
+  console.log("editedNote");
   useEffect(() => {
     if (isEdite) {
       setEditedNote(currentNote);
@@ -42,14 +42,14 @@ const EditModal = (props: EditModalProp) => {
   }, [currentNote]);
 
   const btnCancel = () => {
-    dispatch({ type: interfaceAction.isVisible, isVisible: false });
+    dispatch({ type: isVisibleAction, payload: { isVisible: false } });
     setEditedNote(defaultNote);
   };
 
   const saveEdit = () => {
     if (isEdite) {
       dispatch(editThunk({ ...editedNote, archive: props.archiveState }));
-      dispatch({ type: interfaceAction.isVisible, isVisible: false });
+      dispatch({ type: isVisibleAction, payload: { isVisible: false } });
       setEditedNote(defaultNote);
     } else {
       if (editedNote.name === "") {
@@ -62,14 +62,14 @@ const EditModal = (props: EditModalProp) => {
           archive: props.archiveState,
         })
       );
-      dispatch({ type: interfaceAction.isVisible, isVisible: false });
+      dispatch({ type: isVisibleAction, payload: { isVisible: false } });
     }
   };
 
   return (
     <div
       className={isVisible ? "editModal visible" : "editModal"}
-      onClick={() => dispatch({ type: interfaceAction.isVisible, isVisible: false })}
+      onClick={() => dispatch({ type: isVisibleAction, payload: { isVisible: false } })}
     >
       <div className="editModalContent" onClick={(e) => e.stopPropagation()}>
         <form

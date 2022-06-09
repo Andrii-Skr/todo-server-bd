@@ -7,12 +7,15 @@ export type NoteRes = {
   stats: Stat[];
 };
 
+export type GetNoteResponse = { note: Note[] };
+export type GetStatsResponse = { stats: Stat[] };
+
 export default class NoteService {
-  static async getNotes(): Promise<AxiosResponse<NoteRes>> {
-    return $api.get<NoteRes>("/notes");
+  static async getNotes(): Promise<AxiosResponse<GetNoteResponse>> {
+    return $api.get<GetNoteResponse>("/notes");
   }
-  static async getStats(): Promise<AxiosResponse<NoteRes>> {
-    return $api.get<NoteRes>("/notes/stats");
+  static async getStats(): Promise<AxiosResponse<GetStatsResponse>> {
+    return $api.get<GetStatsResponse>("/notes/stats");
   }
   static async editNote(note: Note): Promise<void> {
     return $api.patch(`/notes/${note._id}`, { note });

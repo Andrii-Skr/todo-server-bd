@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { interfaceAction } from "../actions/interface-action";
+import { isCreateAction, isEditAction, isVisibleAction } from "../actions/interface-action";
 import { InterfaceState, Note } from "../types";
 
 const defaultState: InterfaceState = {
@@ -8,15 +8,15 @@ const defaultState: InterfaceState = {
   isVisible: false,
 };
 export const interfaceReducer = createReducer<InterfaceState>(defaultState, (builder) => {
-  builder.addCase(interfaceAction.isEdit, (state, action: any) => {
+  builder.addCase(isEditAction, (state, action) => {
     console.log("isEdit", action);
-    state.currentNote = action.note;
+    state.currentNote = action.payload.note;
     state.isEdit = true;
   });
-  builder.addCase(interfaceAction.isVisible, (state, action: any) => {
-    state.isVisible = action.isVisible;
+  builder.addCase(isVisibleAction, (state, action) => {
+    state.isVisible = action.payload.isVisible;
   });
-  builder.addCase(interfaceAction.isCreate, (state, action: any) => {
+  builder.addCase(isCreateAction, (state, action) => {
     state.isEdit = false;
   });
 });

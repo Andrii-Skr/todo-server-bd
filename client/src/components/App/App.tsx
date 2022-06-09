@@ -1,41 +1,51 @@
 import React, { useEffect, useState } from "react";
-import RowStatList from "../RowStatList/RowStatList";
 import { useDispatch, useSelector } from "react-redux";
-import EditModal from "../EditModal";
 import { selectIsAuth, selectIsLoading, selectUpdate } from "../../store/store";
 import { AppDispatch } from "../../store/types";
-import RowList from "../RowList/RowList";
 import "./App.css";
-import Auth from "../Auth/Auth";
 import { checkAuthThunk } from "src/store/thunk/auth-thunk";
 import { notesThunk, statsThunk } from "src/store/thunk/notes-thunk";
-import { interfaceAction } from "src/store/actions/interface-action";
-import { authAction } from "src/store/actions/auth-action";
+//import { Route, Routes } from "react-router-dom";
+import { logoutAction } from "src/store/actions/auth-action";
+//import AuthRoute from "../Routes/AuthRoute";
+import Auth from "../Auth";
+import EditModal from "../EditModal";
+import RowList from "../RowList";
+import { isCreateAction, isVisibleAction } from "src/store/actions/interface-action";
+import RowStatList from "../RowStatList";
+//import NoteListRoute from "../Routes/NoteListRoute";
 
 function App() {
+  //const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
+  const [archiveState, setState] = useState<boolean>(false);
+  const activeState = (state: boolean) => {
+    setState(!state);
+    if (state) {
+      // navigate("notelist");
+    } else {
+      // navigate("archive");
+    }
+  };
+
   const isAuth = useSelector(selectIsAuth);
   const isLoading = useSelector(selectIsLoading);
   const update = useSelector(selectUpdate);
-
-  const [archiveState, setState] = useState<boolean>(false);
-  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
       dispatch(checkAuthThunk());
     } else {
-      dispatch({ type: authAction.checkLoading });
+      dispatch({ type: logoutAction });
     }
   }, []);
   useEffect(() => {
-    if (isAuth) {
+    if (isAuth === "loggedIn") {
       dispatch(notesThunk());
       dispatch(statsThunk());
     }
   }, [isAuth, update]);
-  const activeState = (state: boolean) => {
-    setState(!state);
-  };
+
   if (isLoading) {
     return (
       <div className="loadingMain">
@@ -46,18 +56,21 @@ function App() {
       </div>
     );
   }
+  if (isAuth === "unknown") {
+    return <div></div>;
+  }
 
   return (
     <div className="App">
-      <Auth isAuth={isAuth} />
-      {isAuth ? (
+      {!isLoading && <Auth isAuth={isAuth === "loggedIn"} />}
+      {isAuth === "loggedIn" ? (
         <>
           <RowList archiveState={archiveState} state={activeState} />
           <div className="createNoteRight">
             <button
               onClick={() => {
-                dispatch({ type: interfaceAction.isCreate });
-                dispatch({ type: interfaceAction.isVisible, isVisible: true });
+                dispatch({ type: isCreateAction });
+                dispatch({ type: isVisibleAction, payload: { isVisible: true } });
               }}
               className="createNote"
             >

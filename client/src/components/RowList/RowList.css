@@ -5,6 +5,9 @@
   margin: 10px;
 }
 .cell {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
