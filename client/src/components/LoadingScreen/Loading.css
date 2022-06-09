@@ -1,0 +1,11 @@
+.loadingMain img {
+  margin-left: 10px;
+  height: 50px;
+}
+.loadingMain div {
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+}
