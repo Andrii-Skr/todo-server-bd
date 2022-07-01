@@ -37,7 +37,7 @@ const Auth = ({ isAuth }: ProbsAuth) => {
             <button
               onClick={(e) => {
                 dispatch(loginThunk(login.email, login.pass));
-                navigate("note");
+                navigate("/note/list");
               }}
             >
               Login

@@ -2,9 +2,9 @@ import React from "react";
 import { Stat } from "src/store/types";
 
 const icons = {
-  Task: <img src="./img/Task.png" alt="icon" />,
-  "Random Thought": <img src="./img/Random.png" alt="icon" />,
-  Idea: <img src="./img/Idea.png" alt="icon" />,
+  Task: <img src="/img/Task.png" alt="icon" />,
+  "Random Thought": <img src="/img/Random.png" alt="icon" />,
+  Idea: <img src="/img/Idea.png" alt="icon" />,
 };
 type RowStatProps = {
   stat: Stat;

@@ -13,6 +13,6 @@ export const selectIsLoading = (state: RootState) => state.user.isloading;
 export const selectUpdate = (state: RootState) => state.notes.updateNotes;
 export const selectIsEdit = (state: RootState) => state.interface.isEdit;
 export const selectCurrentNote = (state: RootState) => state.interface.currentNote;
-export const selectIsVisible = (state: RootState) => state.interface.isVisible;
+//export const selectIsVisible = (state: RootState) => state.interface.isVisible;
 
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));

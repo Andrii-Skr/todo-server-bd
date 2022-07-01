@@ -13,10 +13,10 @@ const Header = ({ state, archiveState }: HeaderProp) => {
       <div className="cell btnRow">
         <div title="Archive mode"> {archiveState ? "A" : ""}</div>
         <div onClick={() => state(archiveState)} className="myBtn archiveAll">
-          <img src="./img/archiveWhite.png" alt="archive" title="Show archive/notes" />
+          <img src="/img/archiveWhite.png" alt="archive" title="Show archive/notes" />
         </div>
         <div className="myBtn deleteAll">
-          <img src="./img/binWhite.png" alt="deleteAll" title="Delete all notes" />
+          <img src="/img/binWhite.png" alt="deleteAll" title="Delete all notes" />
         </div>
       </div>
     </div>

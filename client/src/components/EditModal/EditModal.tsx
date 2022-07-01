@@ -5,8 +5,8 @@ import MySelect from "./MySelect";
 import "./EditModal.css";
 import { createThunk, editThunk } from "src/store/thunk/notes-thunk";
 import { useSelector } from "react-redux";
-import { selectCurrentNote, selectIsEdit, selectIsVisible } from "src/store/store";
-import { isVisibleAction } from "src/store/actions/interface-action";
+import { selectCurrentNote, selectIsEdit } from "src/store/store";
+import { useNavigate, useParams } from "react-router-dom";
 
 type EditModalProp = {
   archiveState: boolean;
@@ -30,10 +30,22 @@ const options = [
 
 const EditModal = (props: EditModalProp) => {
   const isEdite = useSelector(selectIsEdit);
-  const isVisible = useSelector(selectIsVisible);
+  // const isVisible = useSelector(selectIsVisible);
   const dispatch = useDispatch<AppDispatch>();
   const currentNote = useSelector(selectCurrentNote);
   const [editedNote, setEditedNote] = useState(defaultNote);
+  const navigate = useNavigate();
+  let { noteState, list } = useParams();
+  let isVisible = false;
+
+  if (noteState === "createNote" || noteState === "editNote") {
+    isVisible = true;
+  } else {
+    isVisible = false;
+  }
+
+  console.log("---->", isVisible, noteState);
+
   console.log("editedNote");
   useEffect(() => {
     if (isEdite) {
@@ -42,14 +54,16 @@ const EditModal = (props: EditModalProp) => {
   }, [currentNote]);
 
   const btnCancel = () => {
-    dispatch({ type: isVisibleAction, payload: { isVisible: false } });
+    navigate(-1);
+    //dispatch({ type: isVisibleAction, payload: { isVisible: false } });
     setEditedNote(defaultNote);
   };
 
   const saveEdit = () => {
     if (isEdite) {
       dispatch(editThunk({ ...editedNote, archive: props.archiveState }));
-      dispatch({ type: isVisibleAction, payload: { isVisible: false } });
+      navigate(`/note/${list}`);
+      //dispatch({ type: isVisibleAction, payload: { isVisible: false } });
       setEditedNote(defaultNote);
     } else {
       if (editedNote.name === "") {
@@ -62,14 +76,18 @@ const EditModal = (props: EditModalProp) => {
           archive: props.archiveState,
         })
       );
-      dispatch({ type: isVisibleAction, payload: { isVisible: false } });
+      navigate(`/note/${list}`);
+      //dispatch({ type: isVisibleAction, payload: { isVisible: false } });
     }
   };
 
   return (
     <div
       className={isVisible ? "editModal visible" : "editModal"}
-      onClick={() => dispatch({ type: isVisibleAction, payload: { isVisible: false } })}
+      onClick={() => {
+        navigate(-1);
+        setEditedNote(defaultNote);
+      }}
     >
       <div className="editModalContent" onClick={(e) => e.stopPropagation()}>
         <form

@@ -37,11 +37,7 @@ function App() {
     return <Loading />;
   }
   if (isAuth === "unknown") {
-    return (
-      <div>
-        <Loading />
-      </div>
-    );
+    return <Loading />;
   }
 
   return (
@@ -56,8 +52,8 @@ function App() {
               </div>
             }
           />
-          <Route path="note" element={<NoteListRoute archiveStateDefaulte={false} />} />
-          <Route path="archive" element={<NoteListRoute archiveStateDefaulte={true} />} />
+          <Route path="/note/:list" element={<NoteListRoute />} />
+          <Route path="/note/:list/:noteState" element={<NoteListRoute />} />
         </Route>
         <Route path="*" element={<NotFoundRoute />} />
       </Routes>
